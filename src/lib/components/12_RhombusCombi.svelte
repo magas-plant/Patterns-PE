@@ -28,7 +28,7 @@
 </script>
 
 <div id="control1">
-	<input type="range" min="1" max="30" bind:value={squareCount} />
+	<input type="range" min="2" max="30" bind:value={squareCount} />
 </div>
 <div id="control2">
 	<input type="range" min="1" max="5" step="0.1" bind:value={length} />
