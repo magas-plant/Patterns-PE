@@ -1,6 +1,7 @@
 <script>
 	let squareCount = $state(9);
 	let length = $state(1);
+	let color = 'red';
 
 	let cos = Math.cos(Math.PI / 4);
 	let squareSize = $derived(1000 / (squareCount * (1 + cos)));
@@ -38,7 +39,12 @@
 </div>
 
 <div class="svg-container">
-	<svg viewBox="0 0 1000 1000" class="svg-canvas" shape-rendering="crispEdges">
+	<svg
+		viewBox="0 0 1000 1000"
+		class="svg-canvas"
+		shape-rendering="crispEdges"
+		style={'background-color: ' + color}
+	>
 		<g transform="rotate({Rotation} 500 500)">
 			{#each Array(squareCount + 25) as _, yi}
 				{#each Array(squareCount + 25) as _, xi}

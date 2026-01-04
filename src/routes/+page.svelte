@@ -13,11 +13,13 @@
 	//import Pattern from '$lib/components/9_Mathecore.svelte';
 	//import Pattern from '$lib/components/10_Größe.svelte';
 	//import Pattern from '$lib/components/11_ScalingTest.svelte';
-	import Pattern from '$lib/components/12_RhombusCombi.svelte';
+	//import Pattern from '$lib/components/12_RhombusCombi.svelte';
 	//import Pattern from '$lib/components/13_zweiRechnungen.svelte';
 	//import Pattern from '$lib/components/14_ScalingTestV2.svelte';
 	//import Pattern from '$lib/components/15_NeuesMuster.svelte';
 	//import Pattern from '$lib/components/16_LuckyAccident.svelte';
+	//import Pattern from '$lib/components/17_Colors.svelte';
+	import Pattern from '$lib/components/18_UI.svelte';
 </script>
 
 <div class="app-container">
