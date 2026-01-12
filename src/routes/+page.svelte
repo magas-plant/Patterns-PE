@@ -19,7 +19,10 @@
 	//import Pattern from '$lib/components/15_NeuesMuster.svelte';
 	//import Pattern from '$lib/components/16_LuckyAccident.svelte';
 	//import Pattern from '$lib/components/17_Colors.svelte';
-	import Pattern from '$lib/components/18_UI.svelte';
+	//import Pattern from '$lib/components/18_UI.svelte';
+	//import Pattern from '$lib/components/19_ScaleCorrect.svelte';
+	//import Pattern from '$lib/components/20_moreUI.svelte';
+	import Pattern from '$lib/components/21_colorPicker.svelte';
 </script>
 
 <div class="app-container">
