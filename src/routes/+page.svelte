@@ -22,7 +22,9 @@
 	//import Pattern from '$lib/components/18_UI.svelte';
 	//import Pattern from '$lib/components/19_ScaleCorrect.svelte';
 	//import Pattern from '$lib/components/20_moreUI.svelte';
-	import Pattern from '$lib/components/21_colorPicker.svelte';
+	//import Pattern from '$lib/components/21_colorPicker.svelte';
+	import Pattern from '$lib/components/22_RangeVariant.svelte';
+	//import Pattern from '$lib/components/23_NewOptions.svelte';
 </script>
 
 <div class="app-container">
