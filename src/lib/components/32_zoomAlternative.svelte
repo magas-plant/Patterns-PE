@@ -3,34 +3,44 @@
 	import Slider from '$lib/ui/Slider.svelte';
 	import RangeSlider from '$lib/ui/RangeSlider.svelte';
 
-	let squareCount = $state(16);
-	let length = $state(1);
-	let Rotation = $state(0);
+	// Fixed pattern count - always generate max patterns (size=20 equivalent)
+	const maxSquareCount = 20;
 
-	let squareSize = $derived(1000 / squareCount);
+	// Zoom controls how many patterns are visible (2-20)
+	let visibleSquareCount = $state(8); // Default shows ~8x8 patterns
+	let length = $state(1);
+
 	let cos = Math.cos(Math.PI / 4);
-	let sin = Math.sin(Math.PI / 4);
+
+	// Pattern size is based on maxSquareCount (always small patterns)
+	let squareSize = $derived(1000 / (maxSquareCount * (1 + cos)));
+
 	let cosSize = $derived(cos * squareSize * length);
-	let sinSize = $derived(sin * squareSize * length);
 
 	let Parallelogramm = $derived(
-		`0,0 ${squareSize},0 ${squareSize + cosSize},${sinSize} ${cosSize},${sinSize}`
+		`0,0 ${squareSize},0 ${squareSize + cosSize},${cosSize} ${cosSize},${cosSize}`
 	);
 	let Parallelogramm2 = $derived(
-		`0, ${squareSize} ${cosSize}, ${sinSize + squareSize} ${cosSize}, ${2 * squareSize + sinSize}, 0, ${squareSize * 2}`
+		`${cosSize}, ${squareSize} ${cosSize + squareSize}, ${squareSize} ${squareSize}, ${squareSize + cosSize}, 0, ${squareSize + cosSize}`
 	);
 
-	// Grid calculation for rotation without gaps
-	let gridSpacingX = $derived(squareSize + cosSize);
-	let gridSpacingY = $derived(2 * squareSize + sinSize);
-	let totalGridSizeX = $derived((squareCount + 30) * gridSpacingX);
-	let totalGridSizeY = $derived((squareCount + 30) * gridSpacingY);
-	let centerOffsetX = $derived(totalGridSizeX / 2);
-	let centerOffsetY = $derived(totalGridSizeY / 2);
+	let Rotatepoint = $derived((squareSize + cosSize) / 2);
+	let offset = $state(0);
+
+	let Rotation = $state(0);
+
+	let gridSpacing = $derived(squareSize + cosSize + offset);
+	let totalGridSize = $derived((maxSquareCount + 25) * gridSpacing);
+	let centerOffset = $derived(totalGridSize / 2);
+
+	// Zoom factor: maps visibleSquareCount (2-20) to scale
+	// When visibleSquareCount = 20, scale = 1 (show all patterns)
+	// When visibleSquareCount = 8, scale = 20/8 = 2.5 (zoom in)
+	let zoomScale = $derived(maxSquareCount / visibleSquareCount);
 
 	function calculatePosition(xi, yi) {
-		const x = xi * gridSpacingX - centerOffsetX + 500;
-		const y = yi * gridSpacingY - centerOffsetY + 500;
+		const x = xi * gridSpacing - centerOffset + 500;
+		const y = yi * gridSpacing - centerOffset + 500;
 
 		return { x: x, y: y };
 	}
@@ -43,13 +53,13 @@
 	let chromamax = $state(0.31);
 
 	// Color amount selection (2-7 colors)
-	let selectedColorCount = $state(7);
+	let selectedColorCount = $state(7); // Default: 7 colors
 	let colorOptions = [2, 3, 4, 5, 6, 7];
 
 	// Preset functions
 	function applyPreset1() {
-		squareCount = 8;
-		length = 1;
+		visibleSquareCount = 3;
+		length = 0.6;
 		Rotation = 0;
 		huemin = 0;
 		huemax = 88;
@@ -61,8 +71,8 @@
 	}
 
 	function applyPreset2() {
-		squareCount = 13;
-		length = 0.6;
+		visibleSquareCount = 5;
+		length = 0.7;
 		Rotation = 45;
 		huemin = 149;
 		huemax = 204;
@@ -74,8 +84,8 @@
 	}
 
 	function applyPreset3() {
-		squareCount = 10;
-		length = 1.2;
+		visibleSquareCount = 7;
+		length = 1.7;
 		Rotation = 70;
 		huemin = 201;
 		huemax = 241;
@@ -89,7 +99,7 @@
 	// Generate all 7 possible colors
 	let allColors = $derived(
 		Array.from({ length: 7 }, (_, i) => {
-			const factor = i / 6;
+			const factor = i / 6; // 0 to 1 across 7 colors
 			return chroma.oklch(
 				lightnessmin + (lightnessmax - lightnessmin) * factor,
 				chromamin + (chromamax - chromamin) * factor,
@@ -118,58 +128,51 @@
 		shape-rendering="crispEdges"
 		style={'background-color: ' + color1}
 	>
-		<g transform="rotate({Rotation} 500 500)">
-			{#each Array(squareCount + 30) as _, yi}
-				{#each Array(squareCount + 30) as _, xi}
-					{@const isEven = (xi + yi) % 2 === 0}
-					{@const poly1Fill =
-						selectedColorCount === 4 ? (isEven ? color4 : color2) : isEven ? color2 : color5}
-					{@const rect1Fill =
-						selectedColorCount === 4 ? (isEven ? color3 : color4) : isEven ? color3 : color6}
-					{@const rect2Fill =
-						selectedColorCount === 4 ? (isEven ? color2 : color3) : isEven ? color4 : color7}
-					{@const poly2Fill =
-						selectedColorCount === 4 ? (isEven ? color4 : color2) : isEven ? color5 : color2}
-					<g
-						transform="translate({calculatePosition(xi, yi).x +
-							((xi + yi) % 2 === 0 ? 0 : gridSpacingX) -
-							gridSpacingX} {calculatePosition(xi, yi).y}) scale(1, {(xi + yi) % 2 === 0 ? 1 : -1})"
-					>
-						<polygon
-							points={Parallelogramm}
-							fill={poly1Fill}
-							stroke={poly1Fill}
-							stroke-width="0.5"
-						/>
-
-						<rect
-							transform="translate({cosSize} {sinSize})"
-							width={squareSize}
-							height={squareSize}
-							fill={rect1Fill}
-							stroke={rect1Fill}
-							stroke-width="0.5"
-						/>
-
-						<rect
-							transform="translate({cosSize} {sinSize + squareSize})"
-							width={squareSize}
-							height={squareSize}
-							fill={rect2Fill}
-							stroke={rect2Fill}
-							stroke-width="0.5"
-						/>
-						<polygon
-							points={Parallelogramm2}
-							fill={poly2Fill}
-							stroke={poly2Fill}
-							stroke-width="0.2"
-						/>
-					</g>
+		<!-- Zoom transform: scale from center (500,500) -->
+		<g transform="translate(500 500) scale({zoomScale}) translate(-500 -500)">
+			<g transform="rotate({Rotation} 500 500)">
+				{#each Array(maxSquareCount + 25) as _, yi}
+					{#each Array(maxSquareCount + 25) as _, xi}
+						{@const isEven = (xi + yi) % 2 === 0}
+						{@const poly1Fill =
+							selectedColorCount === 4 ? (isEven ? color4 : color2) : isEven ? color2 : color5}
+						{@const poly2Fill =
+							selectedColorCount === 4 ? (isEven ? color3 : color4) : isEven ? color3 : color6}
+						{@const rectFill =
+							selectedColorCount === 4 ? (isEven ? color2 : color3) : isEven ? color4 : color7}
+						<g
+							transform="translate({calculatePosition(xi, yi).x} {calculatePosition(xi, yi)
+								.y}) translate({-cosSize / 2} {-cosSize / 2}) scale({isEven
+								? 1
+								: -1}) rotate({isEven ? 0 : 270} {Rotatepoint} {Rotatepoint})"
+						>
+							<polygon
+								transform="translate({cosSize} 0) rotate(90)"
+								points={Parallelogramm}
+								fill={poly1Fill}
+								stroke={poly1Fill}
+								stroke-width="1.5"
+							/>
+							<polygon
+								points={Parallelogramm2}
+								fill={poly2Fill}
+								stroke={poly2Fill}
+								stroke-width="1.5"
+							/>
+							<rect
+								transform="translate({cosSize} 0)"
+								width={squareSize}
+								height={squareSize}
+								fill={rectFill}
+								stroke={rectFill}
+								stroke-width="1.5"
+							/>
+						</g>
+					{/each}
 				{/each}
-			{/each}
-		</g>
-	</svg>
+			</g>
+		</g></svg
+	>
 </div>
 
 <div class="sidebar-right">
@@ -182,11 +185,7 @@
 		</div>
 	</div>
 
-	<Slider min={2} max={20} bind:value={squareCount} label="Size" />
-	<Slider min={0} max={10} step="0.1" bind:value={length} label="Length" />
-	<Slider min={0} max={180} bind:value={Rotation} label="Rotation" />
-
-	<RangeSlider min={0} max={360} bind:value1={huemin} bind:value2={huemax} label="Hue Range" />
+	<Slider min={2} max={20} bind:value={visibleSquareCount} label="Zoom" />
 
 	<RangeSlider
 		min={0.1}
@@ -255,13 +254,12 @@
 	}
 
 	.preset-btn:hover {
-		color: #fff;
+		background-color: #666;
 	}
 
 	.preset-btn:active {
-		background: #666;
-		color: #fff;
-		border: 1px solid #777;
+		background-color: #777;
+		transform: translateY(1px);
 	}
 
 	.color-amount-section {
