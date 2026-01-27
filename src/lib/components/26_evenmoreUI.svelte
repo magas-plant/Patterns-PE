@@ -58,34 +58,6 @@
 	let color3 = $derived(chroma.oklch(lightnessmax - 0.4, chromamax, huemax));
 </script>
 
-<div class="sidebar">
-	<h3 style="margin: 0 0 10px 0; font-size: 1rem; font-weight: 500;">Pattern Controls</h3>
-
-	<Slider min={2} max={30} bind:value={squareCount} label="Size" />
-	<Slider min={0} max={10} step="0.1" bind:value={length} label="Length" />
-	<Slider min={0} max={90} bind:value={Rotation} label="Rotation" />
-
-	<RangeSlider min={0} max={360} bind:value1={huemin} bind:value2={huemax} label="Hue Range" />
-
-	<RangeSlider
-		min={0.2}
-		max={0.8}
-		step={0.01}
-		bind:value1={lightnessmin}
-		bind:value2={lightnessmax}
-		label="Lightness Range"
-	/>
-
-	<RangeSlider
-		min={0.1}
-		max={0.5}
-		step={0.01}
-		bind:value1={chromamin}
-		bind:value2={chromamax}
-		label="Chroma Range"
-	/>
-</div>
-
 <div class="svg-container">
 	<svg
 		viewBox="0 0 1000 1000"
@@ -121,16 +93,28 @@
 	</svg>
 </div>
 
-<style>
-	div.sidebar {
-		display: flex;
-		flex-direction: column;
-		list-style: none;
-		padding: 20px;
-		margin: 0 0 1rem 0;
-		gap: 20px;
-		justify-content: flex-start;
-		overflow-y: auto;
-		min-width: 350px;
-	}
-</style>
+<div class="sidebar-right">
+	<Slider min={2} max={30} bind:value={squareCount} label="Size" />
+	<Slider min={0} max={10} step="0.1" bind:value={length} label="Length" />
+	<Slider min={0} max={90} bind:value={Rotation} label="Rotation" />
+
+	<RangeSlider min={0} max={360} bind:value1={huemin} bind:value2={huemax} label="Hue Range" />
+
+	<RangeSlider
+		min={0}
+		max={1}
+		step={0.01}
+		bind:value1={lightnessmin}
+		bind:value2={lightnessmax}
+		label="Lightness Range"
+	/>
+
+	<RangeSlider
+		min={0}
+		max={1}
+		step={0.01}
+		bind:value1={chromamin}
+		bind:value2={chromamax}
+		label="Chroma Range"
+	/>
+</div>
