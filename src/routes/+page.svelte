@@ -30,42 +30,42 @@
 	//import Pattern7 from '$lib/components/25_colorAmount.svelte';
 	//import fertigesUI from '$lib/components/26_evenmoreUI.svelte';
 	//import Pattern23 from '$lib/components/27_hhhha.svelte';
-	import Pattern26 from '$lib/components/28_cleanup.svelte';
-	import Pattern27 from '$lib/components/29_NeuVersuch.svelte';
-	import Pattern28 from '$lib/components/30_drittesMuster.svelte';
-	import ColorVariation from '$lib/components/31_cleanupColor.svelte';
-	import ZoomAlternative from '$lib/components/32_zoomAlternative.svelte';
-	import ColorPicker2 from '$lib/components/33_ColorPicker2.svelte';
+	//import Pattern26 from '$lib/components/28_cleanup.svelte';
+	//import Pattern27 from '$lib/components/29_NeuVersuch.svelte';
+	//import Pattern28 from '$lib/components/30_drittesMuster.svelte';
+	//import ColorVariation from '$lib/components/31_cleanupColor.svelte';
+	//import ZoomAlternative from '$lib/components/32_zoomAlternative.svelte';
+	//import ColorPicker2 from '$lib/components/33_ColorPicker2.svelte';
+	import Pattern29 from '$lib/components/34_ErstesMusterFinal.svelte';
+	import Pattern30 from '$lib/components/37_ZweitesMusterFinal.svelte';
+	import Pattern31 from '$lib/components/35_ColorVariantFinal.svelte';
+	import Pattern32 from '$lib/components/36_DrittesMusterFinal.svelte';
+	import Pattern33 from '$lib/components/38_ColorPickerFinal.svelte';
 
 	let patterns = [
 		{
-			name: 'Cleanup',
-			component: Pattern26,
+			name: 'Muster1',
+			component: Pattern29,
 			description: 'A grid of squares divided into two triangles that can get an offset.'
 		},
 		{
-			name: 'Alternatives Muster',
-			component: Pattern27,
+			name: 'Muster1 Farbvariante',
+			component: Pattern31,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
 		},
 		{
-			name: 'Drittes Muster',
-			component: Pattern28,
+			name: 'Muster1 ColorPicker',
+			component: Pattern33,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
 		},
 		{
-			name: 'Color Cleanup',
-			component: ColorVariation,
+			name: 'Muster2',
+			component: Pattern30,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
 		},
 		{
-			name: 'Zoom Alternative',
-			component: ZoomAlternative,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
-		},
-		{
-			name: 'Color Picker 2',
-			component: ColorPicker2,
+			name: 'Muster3',
+			component: Pattern32,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
 		}
 	];
