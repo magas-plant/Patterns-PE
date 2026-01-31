@@ -41,44 +41,39 @@
 	import Pattern38 from '$lib/components/35_ColorVariantFinal.svelte';
 	import Pattern39 from '$lib/components/36_DrittesMusterFinal.svelte';
 	import Pattern40 from '$lib/components/38_ColorPickerFinal.svelte';
-	import Pattern41 from '$lib/components/39_backgroundGenerator.svelte';
-	import Pattern43 from '$lib/components/41_BaseColorVariant.svelte';
+	//import Pattern41 from '$lib/components/process/39_backgroundGenerator.svelte';
+	import Pattern43 from '$lib/components/40_BaseColorVariant.svelte';
 
 	let patterns = [
 		{
-			name: 'Quadratexpansion',
+			name: 'Square Expansion',
 			component: Pattern36,
 			description: 'A grid of squares divided into two triangles that can get an offset.'
 		},
 		{
-			name: 'Quadratexpansion Farbvariante 1',
+			name: 'Square Expansion Color Variant 1',
 			component: Pattern38,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
 		},
 		{
-			name: 'Quadratexpansion Farbvariante 2',
+			name: 'Square Expansion Color Variant 2',
 			component: Pattern40,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
 		},
 		{
-			name: 'Quadratexpansion x2',
+			name: 'Square Expansion Color Variant 3',
+			component: Pattern43,
+			description: 'Generates a colorful background pattern based on various parameters.'
+		},
+		{
+			name: 'Square Expansion x2',
 			component: Pattern37,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
 		},
 		{
-			name: 'Quadratexpansion ^2',
+			name: 'Square Expansion ^2',
 			component: Pattern39,
 			description: 'A grid of squares divided into two triangles that can get an offset and size.'
-		},
-		{
-			name: 'Hintergrundgenerator',
-			component: Pattern41,
-			description: 'Generates a colorful background pattern based on various parameters.'
-		},
-		{
-			name: 'Hintergrundgenerator Final',
-			component: Pattern43,
-			description: 'Generates a colorful background pattern based on various parameters.'
 		}
 	];
 

@@ -155,6 +155,10 @@
 	<Slider min={0} max={10} step="0.1" bind:value={length} label="Length" />
 	<Slider min={0} max={180} bind:value={Rotation} label="Rotation" />
 
+	<div class="toggle-section">
+		<Toggle bind:value={invertedMode} label="Inverted Color Mode" />
+	</div>
+
 	<div class="color-amount-section">
 		<label class="section-label">Number of Colors</label>
 		<div class="radio-group">
@@ -171,10 +175,6 @@
 				</label>
 			{/each}
 		</div>
-	</div>
-
-	<div class="toggle-section">
-		<Toggle bind:value={invertedMode} label="Inverted Color Mode" />
 	</div>
 
 	<div class="color-picker-section">
