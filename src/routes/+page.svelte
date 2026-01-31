@@ -48,32 +48,37 @@
 		{
 			name: 'Square Expansion',
 			component: Pattern36,
-			description: 'A grid of squares divided into two triangles that can get an offset.'
+			description:
+				'A combination of squares and rhombs creating an optical illusion of cuboids, inspired by the expansion of the universe.'
 		},
 		{
 			name: 'Square Expansion Color Variant 1',
 			component: Pattern38,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
+			description:
+				'The first Color Variant, separating the two sets of cuboids and making the colors more predictable.'
 		},
 		{
 			name: 'Square Expansion Color Variant 2',
 			component: Pattern40,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
+			description: 'The second Color Variant, a way for the user to freely choose the colors.'
 		},
 		{
 			name: 'Square Expansion Color Variant 3',
 			component: Pattern43,
-			description: 'Generates a colorful background pattern based on various parameters.'
+			description:
+				'The last Color Variant, combining all of the previous features and adding the "inverted" mode to create bigger differences between the cuboids.'
 		},
 		{
 			name: 'Square Expansion x2',
 			component: Pattern37,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
+			description:
+				'A new version of the main pattern, based on the same shapes with a different base module.'
 		},
 		{
 			name: 'Square Expansion ^2',
 			component: Pattern39,
-			description: 'A grid of squares divided into two triangles that can get an offset and size.'
+			description:
+				'Another new version, created by a lucky accident while trying to arrange the shapes properly for the main pattern.'
 		}
 	];
 
