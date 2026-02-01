@@ -151,7 +151,7 @@
 </div>
 
 <div class="sidebar-right">
-	<Slider min={2} max={20} step="0.1" bind:value={zoomLevel} label="Zoom" />
+	<Slider min={2} max={18} step="0.1" bind:value={zoomLevel} label="Zoom" />
 	<Slider min={0} max={10} step="0.1" bind:value={length} label="Length" />
 	<Slider min={0} max={180} bind:value={Rotation} label="Rotation" />
 

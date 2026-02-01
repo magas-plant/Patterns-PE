@@ -141,7 +141,7 @@
 							? 1
 							: -1}, 1)"
 					>
-						<polygon points={Parallelogramm} fill={color2} stroke={color2} stroke-width="0" />
+						<polygon points={Parallelogramm} fill={color2} stroke={color2} stroke-width="0.5" />
 
 						<rect
 							transform="translate({cosSize} {sinSize})"
@@ -149,7 +149,7 @@
 							height={squareSize}
 							fill={color3}
 							stroke={color3}
-							stroke-width="0"
+							stroke-width="0.5"
 						/>
 
 						<rect
@@ -158,9 +158,9 @@
 							height={squareSize}
 							fill={color4}
 							stroke={color4}
-							stroke-width="0"
+							stroke-width="0.5"
 						/>
-						<polygon points={Parallelogramm2} fill={color5} stroke={color5} stroke-width="1.5" />
+						<polygon points={Parallelogramm2} fill={color5} stroke={color5} stroke-width="0.5" />
 					</g>
 				{/each}
 			{/each}
@@ -178,7 +178,7 @@
 		</div>
 	</div>
 
-	<Slider min={2} max={20} step="0.1" bind:value={zoomLevel} label="Zoom" />
+	<Slider min={2} max={18} step="0.1" bind:value={zoomLevel} label="Zoom" />
 	<Slider min={0} max={10} step="0.1" bind:value={length} label="Length" />
 	<Slider min={0} max={180} bind:value={Rotation} label="Rotation" />
 
